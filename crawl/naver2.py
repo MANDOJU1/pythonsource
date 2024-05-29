@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.error import HTTPError
 from openpyxl import Workbook
+import re
 
 # openpyxl workbook 생성
 wb = Workbook()  # 새 워크북 생성
@@ -31,14 +32,15 @@ for idx in range(10):
 
     # print(r.url)
 
-# json 가져오기
-data = r.json()
-# print(data)
-# print(data["items"])
-for idx, item in enumerate(data["items"], 1):
-    # print(idx, item["title"], item["link"])  # <b>아이폰</b>
-    ws.append([num, item["title"], item["link"]])
-    num += 1
+    # json 가져오기
+    data = r.json()
+    # print(data)
+    # print(data["items"])
+    for idx, item in enumerate(data["items"], 1):
+        # print(idx, item["title"], item["link"])  # <b>아이폰</b>
+        title = re.sub("<.*?>", "", item["title"])
+        ws.append([num, item["title"], item["link"]])
+        num += 1
 
 
 base_dir = "./crawl/file/"
