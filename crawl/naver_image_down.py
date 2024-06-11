@@ -63,8 +63,6 @@ def main():
             img.click()
             time.sleep(2)
 
-            time.sleep(5)
-
             # 큰이미지 //*[@id="main_pack"]/section[1]/div/div/div[1]/div[2]/div[1]/img
             # div.viewer_image img
             img_url = browser.find_element(
@@ -77,6 +75,8 @@ def main():
             count += 1
         except:
             pass
+
+            time.sleep(5)
 
 
 def set_chrome_driver():
