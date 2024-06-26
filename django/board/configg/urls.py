@@ -1,5 +1,5 @@
 """
-URL configuration for config project.
+URL configuration for configg project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -17,8 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("users/", include("users.urls")),
+    # board 앱에 있는 urls.py 연결하는 코드
+    path("board/", include("board.urls")),
+    path("", RedirectView.as_view(url="/board/")),
 ]
