@@ -11,7 +11,7 @@ class UserForm(UserCreationForm):
 
     class Meta:
         model = User
-                # fields = "__all__"
+        # fields = "__all__"
         # 비밀번호는 필수로 같이 들어감
         # username == id
         fields = ["username", "email"]

@@ -1,16 +1,15 @@
 from django.urls import path
 from . import views
 
-# app_name 으로 name을 구별할 수 있음
 app_name = "board"
 
 urlpatterns = [
-    # http://127.0.0.1:8000/board
+    # http://127.0.0.1:8000/board/
     path("", views.question_list, name="question_list"),
     # http://127.0.0.1:8000/board/1
-    path("<int:qid>", views.question_detail, name="question_detail"),
+    path("<int:qid>/", views.question_detail, name="question_detail"),
+    # http://127.0.0.1:8000/board/answer/create/2 (질문번호)
+    path("answer/create/<int:qid>/", views.answer_create, name="answer_create"),
     # http://127.0.0.1:8000/board/question/create
     path("question/create/", views.question_create, name="question_create"),
-    # http://127.0.0.1:8000/board/answer/create/2 (질문번호)
-    path("answer/create/<int:qid>", views.answer_create, name="answer_create"),
 ]

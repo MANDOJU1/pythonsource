@@ -4,25 +4,18 @@ from .forms import QuestionForm, AnswerForm
 
 from django.core.paginator import Paginator
 
-
 def question_list(request):
     """전체 질문 추출"""
 
-    # 페이지 나누기
     # 현재 페이지 번호 가져오기
-    page = request.GET.get("page", 1)
+    page = request.GET.get("page",1)
 
     # question_list = Question.objects.all()
     question_list = Question.objects.order_by("-created_at")
 
-    # Paginator 객체 만들기
     paginator = Paginator(question_list, 10)
     page_obj = paginator.get_page(page)
 
-    # 페이지 나누기 전
-    # context = {"question_list": question_list}
-
-    # 페이지 나눈 후
     context = {"question_list": page_obj}
     return render(request, "board/question_list.html", context)
 
@@ -48,7 +41,8 @@ def answer_create(request, qid):
     else:
         form = AnswerForm()
 
-    # 폼에 있는 content 가져오기
+
+    # 폼에 있는 content 가져오기 
     # 1. answer = Answer.objects.create(question=question, content=request.POST.get("content"))
 
     # 2. question.answer_set.create(content=request.POST.get("content"))
@@ -59,9 +53,8 @@ def answer_create(request, qid):
     # return redirect("board:question_detail", qid=qid)
 
     # 실패 시(else) get 방식으로 처리
-    context = {"question": question, "form": form}
+    context = {"question":question, "form":form}
     return render(request, "board/question_detail.html", context)
-
 
 def question_create(request):
     if request.method == "POST":
@@ -72,4 +65,4 @@ def question_create(request):
     else:
         form = QuestionForm()
 
-    return render(request, "board/question_form.html", {"form": form})
+    return render(request, "board/question_form.html", {"form":form})

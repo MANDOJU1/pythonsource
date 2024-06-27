@@ -1,3 +1,4 @@
+<!-- extends 가 항상 처음 다음에 load 순서 -->
 {% extends "base.html" %}
 {% load board_filter %}
 {% block content %}
@@ -30,15 +31,14 @@
           </tr>
         </thead>
         <tbody>
+          <!-- for ~ empty 도 가능 -->
           {% if question_list %}
             {% for question in question_list %}
               <tr>
                 <th scope="row">
-                  <!-- 번호 / forloop.counter : 자동으로 번호가 생성됨 -->
-                  <!-- 페이지나누기했는데 1페이지 1-10번, 2페이지에도 1-10번 반복됨 -->
+                  <!-- 번호 question_list.paginator.count : 전체게시물 개수 question_list.start_index : 페이지당 시작되는 게시물의 시작 번호 forloop.counter0 : 0~9까지 반복, |add:1 : 현재 인덱스 + 1 12개 1 page : 12-3 2 page : 2 -->
+                  <!-- {{question.id}} -->
                   <!-- {{forloop.counter}} -->
-
-                  <!-- question_list.paginator.count : 전체 게시물 수 question_list.start_index : 페이지 당 시작되는 게시물의 시작 번호 12개 1 page : 12 - 3 2 page 2 -->
                   {{question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1}}
                 </th>
                 <td>
@@ -50,10 +50,13 @@
                   <a href="{% url "board:question_detail" qid=question.id %}" class="text-decoration-none text-dark">
                     <!--질문 제목-->
                     {{question.subject}}
-                    <span class="text-danger small mx-2">
-                      <!-- 질문에 달린 답변의 개수 표시 -->
-                      {{question.answer_set.count}}
-                    </span>
+
+                    {% if question.answer_set.count > 0 %}
+                      <span class="text-danger small mx-2">
+                        <!-- 질문에 달린 답변의 개수 표시 -->
+                        {{question.answer_set.count}}
+                      </span>
+                    {% endif %}
                   </a>
                 </td>
                 <td>
@@ -65,7 +68,7 @@
                 </td>
               </tr>
             {% endfor %}
-          {% else %}
+            {% else%}
             <tr>
               <td colspan="3">질문이 없습니다.</td>
             </tr>
@@ -75,6 +78,7 @@
       <!-- 페이징 처리 -->
       <nav aria-label="">
         <ul class="pagination justify-content-center">
+          <!-- 장고 has_previous, next 사용 -->
           {% if question_list.has_previous %}
             <li class="page-item">
               <a class="page-link" href="?page={{question_list.previous_page_number}}">Previous</a>
@@ -82,8 +86,9 @@
           {% endif %}
 
           {% for page in question_list.paginator.page_range %}
+            <!-- | 사이 공백이 있으면 filter 인식 못 하니 붙여줘야함 -->
             {% if page >= question_list.number|add:-5 and page <= question_list.number|add:5%}
-              <li class="page-item {% if page == question_list.number %}active{% endif %} ">
+              <li class="page-item {% if page == question_list.number %}active{% endif %}">
                 <a class="page-link" href="?page={{page}}">{{page}}</a>
               </li>
             {% endif %}
