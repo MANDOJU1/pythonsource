@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 # Userform 을 사용해서 만들 수도 있다
 class UserForm(UserCreationForm):
 
@@ -11,7 +12,9 @@ class UserForm(UserCreationForm):
 
     class Meta:
         model = User
-                # fields = "__all__"
+        # fields = "__all__"
         # 비밀번호는 필수로 같이 들어감
         # username == id
         fields = ["username", "email"]
+        # 사용자 이름 대신 아이디로 사용
+        labels = {"username": "아이디"}
