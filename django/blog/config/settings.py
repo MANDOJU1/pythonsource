@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "blog",
+    "common",
 ]
 
 MIDDLEWARE = [
@@ -117,8 +118,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# 로그인 성공 시 이동할 URL
+LOGIN_REDIRECT_URL = "/"
+# 로그아웃 성공 시 이동할 URL
+LOGOUT_REDIRECT_URL = "/"
+
+
+# 파일업로드 설정
+MEDIA_ROOT = Path(BASE_DIR, "media")
+MEDIA_URL = "/media/"
