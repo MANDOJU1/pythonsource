@@ -39,6 +39,10 @@ def create(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+
+            # 태그 저장
+            form.save_m2m()
+
             # 리스트로 이동
             return redirect("blog:list")
             # return redirect("blog:detail", post.id)
