@@ -33,6 +33,16 @@
               <a href="{% url "blog:list" %}" class="btn btn-success">목록</a>
             </div>
           </div>
+
+          <!-- taggit -->
+          <div class="row mt-5">
+            <div class="col-md-10">
+              {% for tag in post.tags.all %}
+                <span class="badge rounded-pill text-bg-dark">#{{tag.name}}</span>
+              {% endfor %}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

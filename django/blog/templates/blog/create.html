@@ -7,17 +7,22 @@
         <form action="" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group mb-3">
-            <label for="subject">제목</label>
+            <label for="title">제목</label>
             <input type="text" name="title" id="title" class="form-control" value="{{form.title.value|default_if_none:''}}"/>
           </div>
           <!-- 오류 표시 영역-->
           <div class="form-group mb-3">
-            <label for=" subject">내용</label>
+            <label for=" content">내용</label>
             <textarea name="content" id="content" rows="10" class="form-control">{{form.content.value|default_if_none:""}}</textarea>
           </div>
           <div class="form-group mb-3">
             <label for="subject">이미지</label>
             <input type="file" name="image" id="image" class="form-control"/>
+          </div>
+          <div class="form-group mb-3">
+            <label for="tags">태그</label>
+            <input type="text" name="tags" id="tags" class="form-control" value="{{form.tags.value|default_if_none:''}}"/>
+            <small>태그는 콤마로 구분해서 입력하세요</small>
           </div>
           <input type="submit" value="새글작성" class="btn btn-primary"/>
         </form>

@@ -36,11 +36,13 @@
         {% endfor %}
         <!-- Pager-->
         <div class="d-flex justify-content-end mb-4">
-          <a class="btn btn-primary text-uppercase" href="#!">← Previous Posts</a>
-
-          <a class="btn btn-primary text-uppercase" href="#!">1/5</a>
-
-          <a class="btn btn-primary text-uppercase" href="#!">Next Posts →</a>
+          {% if posts.has_previous %}
+            <a class="btn btn-primary text-uppercase" href="?page={{posts.previous_page_number}}">← Previous Posts</a>
+          {% endif %}
+          <a class="btn btn-primary text-uppercase" href="#!">{{posts.number}}/{{posts.paginator.num_pages}}</a>
+          {% if posts.has_next %}
+            <a class="btn btn-primary text-uppercase" href="?page={{posts.next_page_number}}">Next Posts →</a>
+          {% endif %}
         </div>
       </div>
     </div>
