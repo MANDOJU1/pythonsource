@@ -21,3 +21,18 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Comment(models.Model):
+    """
+    user, post, content, 작성날짜, 수정날짜 정보
+    """
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return "%s - %s" % (self.id, self.user)

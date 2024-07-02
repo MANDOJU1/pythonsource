@@ -15,4 +15,7 @@ urlpatterns = [
     path("post/modify/<int:post_id>", views.modify, name="modify"),
     # http://127.0.0.1:8000/blog/post/delete/1 :
     path("post/delete/<int:post_id>", views.delete, name="delete"),
+    # 댓글
+    # http://127.0.0.1:8000/blog/post/comment/post_id :
+    path("post/comment/<int:post_id>", views.comment_create, name="comment_create"),
 ]

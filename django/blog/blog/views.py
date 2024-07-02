@@ -1,8 +1,28 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Post, Comment
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+
+
+def comment_create(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == "POST":
+        content = request.POST.get("content").strip()
+
+        # CommentForm을 안쓰는 방법 (1번, 2번)
+        # 1번 방법
+        # Comment.objects.create(user=request.user, post=post, content=content)
+
+        # 2번 방법 : 이 방식은 save() 까지 해주어야 함
+        comment = Comment(user=request.user, post=post, content=content)
+        comment.save()
+
+        # post 일 때 가는 경로
+        return redirect("blog:detail", post_id)
+
+    # get 일 때 가는 경로
+    return redirect("blog:detail", post_id)
 
 
 def delete(request, post_id):
