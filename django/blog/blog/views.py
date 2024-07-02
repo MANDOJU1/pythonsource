@@ -3,6 +3,7 @@ from .models import Post, Comment
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 
 def comment_create(request, post_id):
@@ -91,4 +92,26 @@ def detail(request, post_id):
 
     post = get_object_or_404(Post, id=post_id)
 
-    return render(request, "blog/post.html", {"post": post})
+    # 로그인 유저가 해당 게시물에 좋아요 했는지 안했는지 확인
+    is_liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        is_liked = True
+
+    return render(request, "blog/post.html", {"post": post, "is_liked": is_liked})
+
+
+def post_like(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # 로그인 유저가 해당 게시물에 좋아요 했는지 안했는지 확인
+    is_liked = post.likes.filter(id=request.user.id).exists()
+
+    is_liked_change = False
+
+    if is_liked:
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+        is_liked_change = True
+
+    return JsonResponse({"likes": post.likes.count(), "is_liked": is_liked_change})

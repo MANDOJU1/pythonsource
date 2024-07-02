@@ -10,6 +10,7 @@ class Post(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to="image")
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User, related_name="likes", blank=True)
     tags = TaggableManager()
 
     # auto_now_add : 처음에만 날짜 입력

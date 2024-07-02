@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static "css/post.css" %}">
+{% endblock css %}
 {% block content %}
   <article class="mb-4">
     <div class="container px-4 px-lg-5">
@@ -33,6 +36,8 @@
               <a href="{% url "blog:list" %}" class="btn btn-success">목록</a>
             </div>
           </div>
+
+          {% include "like.html" %}
 
           <!-- taggit -->
           <div class="row mt-5">
@@ -92,3 +97,6 @@
     </div>
   </article>
 {% endblock content %}
+{% block script %}
+  <script src="{% static "js/post.js" %}"></script>
+{% endblock script %}
