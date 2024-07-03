@@ -1,0 +1,43 @@
+
+
+[
+    {
+    "title": "Jurassic World: Fallen kingdom",
+    "genres": ["Action","Sci-fi"],
+    "runtime": 130,
+    "rated": "PG-13",
+    "year": 2018,
+    "directors": ["J.A. Bayona"],
+    "cast": ["Chris Pratt", "Bryce Dallas Howard", "Rafe Spall"],
+    "type": "movie"
+    }
+]
+
+
+[
+    {
+    "title": "Tag",
+    "genres": ["Comedy","Action"],
+    "runtime": 105,
+    "rated": "R",
+    "year": 2015,
+    "directors": ["Jeff Tomsic"],
+    "cast": ["Annabelle Wallis", "Jeremy Renner", "Jon Hamm"],
+    "type": "movie"
+    }
+]
+
+
+[
+    {name:"David", age:45, address:"서울"},
+    {name:"DaveLee", age:25, address:"경기도"},
+    {name:"Andy", age:50, hobby:"골프", address:"경기도"},
+    {name:"Kate", age:35, address:"수원시"},
+    {name:"Brown", age:8}
+]
+
+[
+    {"name":"유진", "age":25, hobbies:["독서","영화","요리"]},
+    {"name":"동현", "age":30, hobbies:["축구","음악","영화"]},
+    {"name":"혜진", "age":35, hobbies:["요리","여행","독서"]},
+]
